@@ -1,55 +1,49 @@
-let artistArray = []
-// // const discogsURL = 'https://api.discogs.com/users/theyear1000/collection/folders/0/releases?per_page=500&token=MpvxclVusZVUOFzPynNMoHjRMUqrvxTJXTAxSgWS'
-
-
-function fetchDiscogsUnique (){
-    fetch('https://api.discogs.com/users/pikeminnow/collection/folders/0/releases?per_page=50')
-    .then((res) => res.json())
-    .then((data) => {debugger;
-        let dataArray = data.releases
-        dataArray.forEach(createArtistsArray)
-        artistArray.sort();
-        let uniqueArtists = [...new Set(artistArray)]
-        console.log(uniqueArtists)
-    }
-    )
-}
-
-// function createArtistsArray (array) {
-//     // const artist = createElement ('p')
-//     artistArray.push(array.basic_information.artists[0].name)
-//     return artistArray    
-// }
-
 let parsedReleases = []
 
-function fetchDiscogsFull (){
-    fetch('https://api.discogs.com/users/theyear1000/collection/folders/0/releases?per_page=25')
-    .then((res) => res.json())
-    .then((data) => {
-        debugger;
-        let returnData = data.releases;
-        returnData.forEach(parseInfo);
-        console.log(parsedReleases)
-    })
+
+//fetch data from Discogs, send to be parsed, send to be alphabetized by artist
+function fetchDiscogsFull() {
+    fetch('https://api.discogs.com/users/theyear1000/collection/folders/0/releases?per_page=10')
+        .then((res) => res.json())
+        .then((data) => {
+            let returnData = data.releases;
+            returnData.forEach(parseInfo);
+            alphabetize(parsedReleases);
+            console.log(parsedReleases)
+        })
 }
 
-function parseInfo(release) {;
-    // console.log(release)
+//take returned data from discogs, parse out desired info, return in array
+function parseInfo(release) {
+    ;
     let singleParsedRelease = [
-        {'artist': release.basic_information.artists[0].name}, 
-        {'title': release.basic_information.title},
-        {'year': release.basic_information.year},
-        {'genre': release.basic_information.genres[0]}];
+        {
+            'artist': release.basic_information.artists[0].name,
+            'title': release.basic_information.title,
+            'year': release.basic_information.year,
+            'genre': release.basic_information.genres[0]
+        }];
     parsedReleases.push(singleParsedRelease)
-    // debugger;
-    // console.log(parsedReleases)
-    
+
     return parsedReleases;
 }
 
+//alphabetize by artist and return changed array
+function alphabetize(array) {
+    array.sort((a, b) => {
+        let aValue = a[0].artist;
+        let bArtist = b[0].artist;
 
+        if (aValue.localeCompare(bArtist) < 0) {
+            return -1
+        } else if (aValue.localeCompare(bArtist) > 0) {
+            return 1
+        } else if (aValue.localeCompare(bArtist) === 0) {
+            return 0
+        }
 
+    })
+}
 
 fetchDiscogsFull()
 
@@ -79,3 +73,17 @@ fetchDiscogsFull()
 // }
 
 // getToken()
+
+// function fetchDiscogsUnique() {
+//     fetch('https://api.discogs.com/users/pikeminnow/collection/folders/0/releases?per_page=50')
+//         .then((res) => res.json())
+//         .then((data) => {
+//             debugger;
+//             let dataArray = data.releases
+//             dataArray.forEach(createArtistsArray)
+//             artistArray.sort();
+//             let uniqueArtists = [...new Set(artistArray)]
+//             console.log(uniqueArtists)
+//         }
+//         )
+// }
