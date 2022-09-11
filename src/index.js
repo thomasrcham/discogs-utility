@@ -7,9 +7,12 @@ function fetchDiscogsFull() {
         .then((res) => res.json())
         .then((data) => {
             let returnData = data.releases;
+            // console.log(returnData);
+            // debugger
             returnData.forEach(parseInfo);
+            orderByYear(parsedReleases);
             alphabetize(parsedReleases);
-            console.log(parsedReleases)
+            // console.log(parsedReleases)
         })
 }
 
@@ -20,13 +23,41 @@ function parseInfo(release) {
         {
             'artist': release.basic_information.artists[0].name,
             'title': release.basic_information.title,
-            'year': release.basic_information.year,
+            'year': getYear(release.basic_information.master_url),
             'genre': release.basic_information.genres[0]
         }];
+        console.log(singleParsedRelease)
     parsedReleases.push(singleParsedRelease)
 
     return parsedReleases;
 }
+
+function getYear (url) {
+    let year =
+    fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+        year = data.year;
+        return year;
+    })
+    return year
+}
+
+function orderByYear(array) {
+    array.sort((a, b) => {
+        let aValue = a[0].year;
+        let bValue = b[0].year;
+        if (aValue > bValue) {
+            return -1
+        } else if (aValue < bValue)  {
+            return 1
+        } else if (aValue === bValue)  {
+            return 0
+        }
+
+    })
+}
+
 
 //alphabetize by artist and return changed array
 function alphabetize(array) {
