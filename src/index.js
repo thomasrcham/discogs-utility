@@ -35,17 +35,17 @@
 
 // discogsImage()
 
-//&token=MpvxclVusZVUOFzPynNMoHjRMUqrvxTJXTAxSgWS
+//
 
 
-function getToken() {
-    debugger;
-    fetch('https://hidden-plateau-87951.herokuapp.com/https://api.discogs.com/oauth/request_token', {
-        method: 'GET',
-        headers: { discogsHeader }
-    })
-        .then((data) =>{console.log(data)})
-        .catch(console.error)
-}
+// function getToken() {
+//     debugger;
+//     fetch('https://hidden-plateau-87951.herokuapp.com/https://api.discogs.com/oauth/request_token', {
+//         method: 'GET',
+//         headers: { discogsHeader }
+//     })
+//         .then((data) =>{console.log(data)})
+//         .catch(console.error)
+// }
 
-getToken()
+// getToken()
