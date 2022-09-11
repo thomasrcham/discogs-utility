@@ -1,1 +1,0 @@
-const discogsURL = 'https://api.discogs.com/users/theyear1000/collection/folders/0/releases?per_page=50&token=MpvxclVusZVUOFzPynNMoHjRMUqrvxTJXTAxSgWS'
