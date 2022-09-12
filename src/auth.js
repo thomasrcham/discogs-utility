@@ -2,7 +2,7 @@
 //done
 // 2
 // send a GET request to the Discogs request token URL
-var response = "";
+let response = "";
 let authorizationObj = {
     "OAuth oauth_consumer_key": "JbKhfAHeBoYpONHrwhFo",
     oauth_nonce: "random_string_or_timestamp",
@@ -12,20 +12,25 @@ let authorizationObj = {
     oauth_callback: "https://ashtonmackenzie.com/discogs-utility/"
 }
 
-let formattedAuth = Object.entries(authorizationObj).map((mapResponse) => {
-    let key = mapResponse[0];
-    let value = mapResponse[1];
-    return `${key}="${value}"`;})
-    .join(',\n');
+let formattedAuthorizationObj = objectToString(authorizationObj);
 
-let requestTokenHeaders = {
+let requestTokenHeadersObj = {
     "Content-Type": "application/x-www-form-urlencoded",
-    "Authorization": formattedAuth
-    // "User-Agent": navigator.userAgent
+    "Authorization": formattedAuthorizationObj,
+    "User-Agent": navigator.userAgent
 }
-console.log(requestTokenHeaders);
-// response = fetch('https://api.discogs.com/oauth/request_token', requestTokenHeaders)
 
+function objectToString (object) {
+  let stringObject =  Object.entries(object).map((mapResponse) => {
+        let key = mapResponse[0];
+        let value = mapResponse[1];
+        return `${key}="${value}"`;
+    }).join(',\n        ');
+    return "\n        "+stringObject;
+}
+
+console.log(requestTokenHeadersObj);
+ response = fetch('https://api.discogs.com/oauth/request_token', requestTokenHeadersObj).then(console.log(response));
 // 3
 // redirect user to Discogs Auth page
 // 4 
