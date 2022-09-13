@@ -1,7 +1,3 @@
-//if you do not have a key, it is undefined
-let key = undefined;
-let userName = undefined;
-
 document.addEventListener('DOMContentLoaded', () => checkKey(key, userName));
 
 function checkKey (key, userName) {
