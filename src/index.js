@@ -1,10 +1,10 @@
+//global variables
 let parsedReleases = []
 let reissues =[]
 
-
 //fetch data from Discogs, send to be parsed, send to be alphabetized by artist
 function fetchDiscogsFull() {
-    fetch('https://api.discogs.com/users/theyear1000/collection/folders/0/releases?per_page=50')
+    fetch(`https://api.discogs.com/users/${userName}/collection/folders/0/releases?per_page=15`)
         .then((res) => res.json())
         .then((data) => {
             console.log(data)
@@ -90,45 +90,3 @@ function generateTable (array) {
 }
 
 
-
-
-// function discogsImage() {
-//     fetch('https://hidden-plateau-87951.herokuapp.com/https://api.discogs.com/masters/21520'
-//     , { token: 'MpvxclVusZVUOFzPynNMoHjRMUqrvxTJXTAxSgWS'}
-
-//     )
-//     .then((res) => res.json())
-//     .then((data) => console.log(data))
-//     .catch(console.error)
-// }
-
-// discogsImage()
-
-//
-
-
-// function getToken() {
-//     debugger;
-//     fetch('https://hidden-plateau-87951.herokuapp.com/https://api.discogs.com/oauth/request_token', {
-//         method: 'GET',
-//         headers: { discogsHeader }
-//     })
-//         .then((data) =>{console.log(data)})
-//         .catch(console.error)
-// }
-
-// getToken()
-
-// function fetchDiscogsUnique() {
-//     fetch('https://api.discogs.com/users/pikeminnow/collection/folders/0/releases?per_page=50')
-//         .then((res) => res.json())
-//         .then((data) => {
-//             debugger;
-//             let dataArray = data.releases
-//             dataArray.forEach(createArtistsArray)
-//             artistArray.sort();
-//             let uniqueArtists = [...new Set(artistArray)]
-//             console.log(uniqueArtists)
-//         }
-//         )
-// }
