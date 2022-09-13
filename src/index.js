@@ -13,6 +13,7 @@ function fetchDiscogsFull() {
             let returnData = data.releases;
             // console.log(returnData);
             returnData.forEach(parseInfo);
+            parsedReleases.forEach(checkChar);
             orderByYear(parsedReleases);
             alphabetizeByArtist(parsedReleases);
             console.log(parsedReleases)})
@@ -83,7 +84,12 @@ function fetchDiscogsFull() {
     
     }
     
-    
+    function checkChar (array) {
+        if (array.artist.charAt(array.artist.length - 3) === '(') {
+          array.artist = array.artist.substring(0,array.artist.length - 4)
+          return (array.artist)
+        }
+    }
 
     setTimeout(() => { 
         fetchDiscogsFull() 
@@ -104,6 +110,7 @@ function parseInfo(release) {
             'descriptions': release.basic_information.formats[0].descriptions
         };
     // console.log(singleParsedRelease)
+
     parsedReleases.push(singleParsedRelease)
 
     return parsedReleases;
