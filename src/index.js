@@ -1,5 +1,5 @@
 let parsedReleases = []
-let reissues =[]
+let reissues = []
 
 
 //fetch data from Discogs, send to be parsed, send to be alphabetized by artist
@@ -29,33 +29,35 @@ function parseInfo(release) {
             'genre': release.basic_information.genres[0],
             'descriptions': release.basic_information.formats[0].descriptions
         }];
-        // console.log(singleParsedRelease)
+    // console.log(singleParsedRelease)
     parsedReleases.push(singleParsedRelease)
 
     return parsedReleases;
 }
 
-function getYear (url) {
-    let year =
-    fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-        // debugger
-        year = data.year;
-        return year;
-    })
-    return year
-}
+//pull year from Master Release
+// function getYear(url) {
+//     let year =
+//         fetch(url)
+//             .then((res) => res.json())
+//             .then((data) => {
+//                 // debugger
+//                 year = data.year;
+//                 return year;
+//             })
+//     return year
+// }
 
+//order by year
 function orderByYear(array) {
     array.sort((a, b) => {
         let aValue = a[0].year;
         let bValue = b[0].year;
         if (aValue < bValue) {
             return -1
-        } else if (aValue > bValue)  {
+        } else if (aValue > bValue) {
             return 1
-        } else if (aValue === bValue)  {
+        } else if (aValue === bValue) {
             return 0
         }
 
@@ -79,17 +81,47 @@ function alphabetizeByArtist(array) {
     })
 }
 
-
-setTimeout(() => {fetchDiscogsFull()}, 500); 
-
-function generateTable (array) {
-    let i = array.length;
-    if (i>5) {
-        
+function createTable() {
+    let x = 25;
+    for (let i = 0; i < x; i++) {
+        if ((i % 5) === 0) {
+            createRow(i);
+        } else {
+            createCell(i);
+        }
     }
 }
 
+function createRow(i) {
+    let tr = document.createElement('tr');
+    let td = document.createElement('td');
+    let table = document.getElementById('thetable')
 
+    tr.classList = 'row';
+    tr.id = `${i / 5}`;
+    td.classList = 'album';
+    td.id = 'td' + `${i}`;
+    td.setAttribute('background', `./images/image${i + 1}.png`);
+
+    tr.appendChild(td);
+    table.appendChild(tr);
+}
+
+function createCell(i) {
+    let td = document.createElement('td');
+    let trID = Math.floor(i / 5)
+
+    td.classList = 'album';
+    td.id = 'td' + `${i}`;
+    td.setAttribute('background', `./images/image${i + 1}.png`);
+
+    document.getElementById(trID).appendChild(td);
+
+}
+
+createTable()
+
+setTimeout(() => { fetchDiscogsFull() }, 500);
 
 
 // function discogsImage() {
