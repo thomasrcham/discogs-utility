@@ -1,8 +1,8 @@
 
-document.addEventListener('DOMContentLoaded', () => checkKey(key, userName));
+document.addEventListener('DOMContentLoaded', () => checkKey());
 
 
-function checkKey (key, userName) {
+function checkKey () {
     if (!key || !userName){
         const loginContainer = document.getElementById('loginForm');
         const loginForm = document.createElement('form');
@@ -14,6 +14,7 @@ function checkKey (key, userName) {
         loginForm.addEventListener('submit', (loginSubmitEvent) => {
             loginSubmitEvent.preventDefault();
             console.log(loginSubmitEvent);
+
             //need to grab key and username and assign those values - RETURN THESE so that other functions may use them!
         });
 
