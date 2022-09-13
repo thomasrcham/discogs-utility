@@ -48,14 +48,6 @@ function fetchDiscogsFull() {
         p.innerText = parsedReleases[i].artist;
         p.classList = 'artistName';
 
-
-
-        // if (i<9) {
-        // td.setAttribute('background', `./images/image0${i + 1}.png`);
-        // } else{ 
-        //     td.setAttribute('background', `./images/image${i + 1}.png`);
-        // }
-
         td.appendChild(p);
         tr.appendChild(td);
         theTable.appendChild(tr);
@@ -72,12 +64,6 @@ function fetchDiscogsFull() {
 
         p.innerText = parsedReleases[i].artist;
         p.classList = 'artistName';
-
-        // if (i<9) {
-        //     td.setAttribute('background', `./images/image0${i + 1}.png`);
-        //     } else{ 
-        //         td.setAttribute('background', `./images/image${i + 1}.png`);
-        //     }
 
         td.appendChild(p);
         document.getElementById(trID).appendChild(td);
@@ -161,46 +147,3 @@ function alphabetizeByArtist(array) {
 
     })
 }
-
-
-
-// function discogsImage() {
-//     fetch('https://hidden-plateau-87951.herokuapp.com/https://api.discogs.com/masters/21520'
-//     , { token: 'MpvxclVusZVUOFzPynNMoHjRMUqrvxTJXTAxSgWS'}
-
-//     )
-//     .then((res) => res.json())
-//     .then((data) => console.log(data))
-//     .catch(console.error)
-// }
-
-// discogsImage()
-
-//
-
-
-// function getToken() {
-//     debugger;
-//     fetch('https://hidden-plateau-87951.herokuapp.com/https://api.discogs.com/oauth/request_token', {
-//         method: 'GET',
-//         headers: { discogsHeader }
-//     })
-//         .then((data) =>{console.log(data)})
-//         .catch(console.error)
-// }
-
-// getToken()
-
-// function fetchDiscogsUnique() {
-//     fetch('https://api.discogs.com/users/pikeminnow/collection/folders/0/releases?per_page=50')
-//         .then((res) => res.json())
-//         .then((data) => {
-//             debugger;
-//             let dataArray = data.releases
-//             dataArray.forEach(createArtistsArray)
-//             artistArray.sort();
-//             let uniqueArtists = [...new Set(artistArray)]
-//             console.log(uniqueArtists)
-//         }
-//         )
-// }
