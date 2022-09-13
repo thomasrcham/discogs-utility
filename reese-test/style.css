@@ -1,0 +1,9 @@
+.album {
+    width: 150px;
+    height: 150px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    background-size: contain;
+    background-repeat:no-repeat;
+}
