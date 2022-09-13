@@ -2,59 +2,39 @@ body {
     background-color: black;
 }
 
-.cover {
-    width: 18%;
-    height: auto;
-    /* padding: 1%;
-    outline-style: solid;
-    outline-color: grey;
-    outline-width: 1px; */
-    display: inline;
-    height: auto;
+.coverImage {
+    display: block;
+    object-fit: contain;
+    max-width: 100%;
+    transition: 0.3s;
 }
 
-.container {
-    position: relative;
-    display: inline;
+.albumCell {
+  width: 20%;
+  border-style: solid;
+  border-color: white;
+  border-width: 1px;
+  position: relative
 }
 
-.overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    /* height: 100%;
-    width: 100%; */
-    opacity: 0;
-    transition: .5s ease;
-    display: inline;
-    background-color: #008CBA;
-  }
-
-  .container:hover .overlay {
-    opacity: 1;
-  }
-  
-  .text {
-    color: BLACK;
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    text-align: center;
-    display: inline;
-  }
-
-  .album {
-    width: 150px;
-    height: 150px;
-    border-style: solid;
-    border-color: white;
-    border-width: 1px;
-    background-size: contain;
-    background-repeat:no-repeat;
+.albumCell:hover .coverImage{
+  opacity:0.5
 }
 
-.artistName {
-  color: white
+.albumCell:hover .div {
+  opacity: 1;
+}
+
+.div {
+  color: white;
+  opacity: 0;
+  transition: 0.3s;
+  position: absolute;
+  top: 0;
+  left: 10;
+}
+
+
+#thetable {
+  table-layout: fixed;
 }
