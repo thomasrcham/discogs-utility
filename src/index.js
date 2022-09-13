@@ -94,30 +94,37 @@ function main() {
             td.addEventListener('click', (tdClickEvent) => { detailReflow(tdClickEvent) });
             //reflow the table when an album is clicked
             function detailReflow(tdClickEvent) {
+                deleteTrDetail();
                 console.log(tdClickEvent);
                 const trDetail = document.createElement('tr');
                 const tdDetail = document.createElement('td');
                 const tdDetailP = document.createElement('p');
                 const targetTr = tdClickEvent.target.parentElement.parentElement;
 
-                trDetail.className = "trDetail";
+                trDetail.id = "trDetail";
                 trDetail.append(tdDetail);
 
                 tdDetail.colSpan = 5;
                 tdDetail.className = "tdDetail";
                 tdDetail.append(tdDetailP);
+
+                //REESE HERE!
                 tdDetailP.innerText = "testInnerText"
 
                 targetTr.insertAdjacentElement('afterEnd', trDetail)
 
                 trDetail.addEventListener('click', (trClickEvent) => {
                     console.log(trClickEvent);
-                    // trClickEvent.target.remove();
-                    const oldDetails = document.getElementsByClassName('trDetail');
-                    for (const row in oldDetails) {
-                        oldDetails[row].remove();
-                    }
+                    deleteTrDetail();
                 })
+
+                function deleteTrDetail() {
+                    const oldDetails = document.getElementById('trDetail');
+                    if (oldDetails) {
+                        oldDetails.remove();
+                    }
+
+                }
 
             }
         }

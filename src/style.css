@@ -1,12 +1,12 @@
 body {
-    background-color: black;
+  background-color: black;
 }
 
 .coverImage {
-    display: block;
-    object-fit: contain;
-    max-width: 100%;
-    transition: 0.3s;
+  display: block;
+  object-fit: contain;
+  max-width: 100%;
+  transition: 0.3s;
 }
 
 .albumCell {
@@ -17,12 +17,16 @@ body {
   position: relative
 }
 
-.albumCell:hover .coverImage{
-  opacity:0.5
+.albumCell:hover .coverImage {
+  opacity: 0.5
 }
 
 .albumCell:hover .div {
   opacity: 1;
+}
+
+.tdDetail>p {
+  color: white;
 }
 
 .div {
