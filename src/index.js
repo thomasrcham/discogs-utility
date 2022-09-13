@@ -1,10 +1,10 @@
+//global variables
 let parsedReleases = []
 let reissues = []
 
-
 //fetch data from Discogs, send to be parsed, send to be alphabetized by artist
 function fetchDiscogsFull() {
-    fetch('https://api.discogs.com/users/theyear1000/collection/folders/0/releases?per_page=50')
+    fetch(`https://api.discogs.com/users/${userName}/collection/folders/0/releases?per_page=15`)
         .then((res) => res.json())
         .then((data) => {
             console.log(data)
