@@ -1,4 +1,6 @@
+
 document.addEventListener('DOMContentLoaded', () => checkKey(key, userName));
+
 
 function checkKey (key, userName) {
     if (!key || !userName){
@@ -6,41 +8,37 @@ function checkKey (key, userName) {
         const loginForm = document.createElement('form');
         const loginUserName = document.createElement('input');
         const loginPAT = document.createElement('input');
-        const loginSubmit = document.createElement('input');
+        const loginSubmit = document.createElement('button');
 
-        loginForm.id = "loginForm";
-        loginForm.action = "#";
+        loginForm.id = "loginForm";     
+        loginForm.addEventListener('submit', (loginSubmitEvent) => {
+            loginSubmitEvent.preventDefault();
+            console.log(loginSubmitEvent);
+            //need to grab key and username and assign those values - RETURN THESE so that other functions may use them!
+        });
 
         loginSubmit.type = "submit";
-        loginSubmit.addEventListener('submit', loginSubmit);
+        loginSubmit.value = "submit";
+        loginSubmit.innerText = "Submit";
         
         loginUserName.placeholder = "Discogs Username";
         loginUserName.id = "loginUserName";
         
         loginPAT.placeholder = "Discogs PAT";
-        loginPAT.placeholder = "loginPAT"
+        loginPAT.id = "loginPAT"
         
         loginForm.append(loginUserName, loginPAT, loginSubmit);
         loginContainer.append(loginForm);
     }
-
+main();
 }
 
-function loginSubmit (loginSubmitEvent){
-    console.log(loginSubmitEvent);
-}
+//assign authUsername and authToken so they can be used in fetches here
+const authToken = `&token=${key}`
 
 
-function objectToString (object) {
-  let stringObject =  Object.entries(object).map((mapResponse) => {
-        let key = mapResponse[0];
-        let value = mapResponse[1];
-        return `${key}="${value}"`;
-    }).join(', ');
-    return stringObject;
-}
 //test authenticated response
-//  response = fetch(`https://api.discogs.com/database/search?q=Nirvana&token=${key}`)
+//  response = fetch(`https://api.discogs.com/database/search?q=Nirvana${authToken}`)
 //  .then((response) => response.json())
 //  .then((response) => console.log(response));
 
