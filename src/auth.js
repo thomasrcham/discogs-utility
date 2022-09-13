@@ -2,15 +2,15 @@
 document.addEventListener('DOMContentLoaded', () => checkKey());
 
 
-function checkKey () {
-    if (!key || !userName){
+function checkKey() {
+    if (!key || !userName) {
         const loginContainer = document.getElementById('loginForm');
         const loginForm = document.createElement('form');
         const loginUserName = document.createElement('input');
         const loginPAT = document.createElement('input');
         const loginSubmit = document.createElement('button');
 
-        loginForm.id = "loginForm";     
+        loginForm.id = "loginForm";
         loginForm.addEventListener('submit', (loginSubmitEvent) => {
             loginSubmitEvent.preventDefault();
             console.log(loginSubmitEvent);
@@ -21,21 +21,24 @@ function checkKey () {
         loginSubmit.type = "submit";
         loginSubmit.value = "submit";
         loginSubmit.innerText = "Submit";
-        
+
         loginUserName.placeholder = "Discogs Username";
         loginUserName.id = "loginUserName";
-        
+
         loginPAT.placeholder = "Discogs PAT";
         loginPAT.id = "loginPAT"
-        
+
         loginForm.append(loginUserName, loginPAT, loginSubmit);
         loginContainer.append(loginForm);
     }
-main();
-}
+    else {
 
+        main();
+    }
+}
+const authToken = `&token=${key}`;
 //assign authUsername and authToken so they can be used in fetches here
-const authToken = `&token=${key}`
+
 
 
 //test authenticated response

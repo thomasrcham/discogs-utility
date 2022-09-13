@@ -121,12 +121,12 @@ function main() {
                 array.artist = array.artist.substring(0, array.artist.length - 4);
                 return (array.artist);
             }
+        }
+        setTimeout(() => {
+            fetchDiscogsFull()
+        }, 500);
 
-            setTimeout(() => {
-                fetchDiscogsFull()
-            }, 500);
 
-        };
 
         //take returned data from discogs, parse out desired info, return in array
         function parseInfo(release) {
