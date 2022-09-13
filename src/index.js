@@ -1,4 +1,4 @@
-//global variables
+function main () {//global variables
 let parsedReleases = []
 // let reissues = []
 
@@ -6,7 +6,7 @@ addEventListener('DOMContentLoaded', () => {
 
 //fetch data from Discogs, send to be parsed, send to be alphabetized by artist
 function fetchDiscogsFull() {
-    fetch(`https://api.discogs.com/users/${userName}/collection/folders/0/releases?per_page=25`)
+    fetch(`https://api.discogs.com/users/${userName}/collection/folders/0/releases?per_page=25${authToken}`)
         .then((res) => res.json())
         .then((data) => {
             console.log(data)
@@ -36,19 +36,29 @@ function fetchDiscogsFull() {
     function createRow(i) {
         let tr = document.createElement('tr');
         let td = document.createElement('td');
+        let div = document.createElement('div');
+        let img = document.createElement('img');
         let p = document.createElement('p');
         let theTable = document.querySelector('table')
     
         tr.classList = 'row';
         tr.id = `${i / 5}`;
 
-        td.classList = 'album';
-        td.id = 'td' + `${i}`;
+        td.classList = 'albumCell';
+        td.id = `albumCell ${i}`;
+
+        div.classList = 'div';
+
+        img.src = parsedReleases[i].cover;
+        img.alt = `${parsedReleases[i].artist} - ${parsedReleases[i].title}`;
+        img.id = `coverImage ${i}`;
+        img.classList = 'coverImage';
 
         p.innerText = parsedReleases[i].artist;
-        p.classList = 'artistName';
+        p.classList = 'artistNameText';
 
-        td.appendChild(p);
+        div.appendChild(p);
+        td.append(img,div);
         tr.appendChild(td);
         theTable.appendChild(tr);
     }
@@ -56,16 +66,26 @@ function fetchDiscogsFull() {
 //creates cells for all remaining array items    
     function createCell(i) {
         let td = document.createElement('td');
-        let trID = Math.floor(i / 5)
+        let div = document.createElement('div');
+        let img = document.createElement('img');
+        let trID = Math.floor(i / 5);
         let p = document.createElement('p');
 
-        td.classList = 'album';
-        td.id = 'td' + `${i}`;
+        td.classList = 'albumCell';
+        td.id = `albumCell ${i}`;
+
+        div.classList = 'div';
+
+        img.src = parsedReleases[i].cover;
+        img.alt = `${parsedReleases[i].artist} - ${parsedReleases[i].title}`;
+        img.id = `coverImage ${i}`;
+        img.classList = 'coverImage';
 
         p.innerText = parsedReleases[i].artist;
-        p.classList = 'artistName';
+        p.classList = 'artistNameText';
 
-        td.appendChild(p);
+        div.appendChild(p);
+        td.append(img,div);
         document.getElementById(trID).appendChild(td);
     
     }
@@ -93,7 +113,9 @@ function parseInfo(release) {
             // 'year': getYear(release.basic_information.master_url),
             'year': release.basic_information.year,
             'genre': release.basic_information.genres[0],
-            'descriptions': release.basic_information.formats[0].descriptions
+            'descriptions': release.basic_information.formats[0].descriptions,
+            'folderID': release.folder_id,
+            'cover': release.basic_information.cover_image,
         };
     // console.log(singleParsedRelease)
 
@@ -146,4 +168,5 @@ function alphabetizeByArtist(array) {
         }
 
     })
+}
 }
