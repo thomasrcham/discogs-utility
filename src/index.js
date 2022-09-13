@@ -1,4 +1,5 @@
 let parsedReleases = []
+let reissues =[]
 
 
 //fetch data from Discogs, send to be parsed, send to be alphabetized by artist
@@ -9,10 +10,9 @@ function fetchDiscogsFull() {
             console.log(data)
             let returnData = data.releases;
             // console.log(returnData);
-            // debugger
             returnData.forEach(parseInfo);
             orderByYear(parsedReleases);
-            alphabetize(parsedReleases);
+            alphabetizeByArtist(parsedReleases);
             console.log(parsedReleases)
         })
 }
@@ -62,9 +62,8 @@ function orderByYear(array) {
     })
 }
 
-
 //alphabetize by artist and return changed array
-function alphabetize(array) {
+function alphabetizeByArtist(array) {
     array.sort((a, b) => {
         let aValue = a[0].artist;
         let bArtist = b[0].artist;
@@ -80,7 +79,18 @@ function alphabetize(array) {
     })
 }
 
+
 setTimeout(() => {fetchDiscogsFull()}, 500); 
+
+function generateTable (array) {
+    let i = array.length;
+    if (i>5) {
+        
+    }
+}
+
+
+
 
 // function discogsImage() {
 //     fetch('https://hidden-plateau-87951.herokuapp.com/https://api.discogs.com/masters/21520'
