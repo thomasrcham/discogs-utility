@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => checkKey(key, userName));
+document.addEventListener('DOMContentLoaded', () => checkKey());
 
-function checkKey (key, userName) {
+function checkKey () {
     if (!key || !userName){
         const loginContainer = document.getElementById('loginForm');
         const loginForm = document.createElement('form');
@@ -18,18 +18,26 @@ function checkKey (key, userName) {
         loginUserName.id = "loginUserName";
         
         loginPAT.placeholder = "Discogs PAT";
-        loginPAT.placeholder = "loginPAT"
+        loginPAT.id = "loginPAT"
         
         loginForm.append(loginUserName, loginPAT, loginSubmit);
         loginContainer.append(loginForm);
+
+        //Attempting to send out loginUserName and loginPat to loginSubmit function
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            //console.log(e.target.loginUserName.value); //Works
+            //console.log(e.target.loginPAT.value) //Works
+            userName = e.target.loginUserName.value;
+            key = e.target.loginPAT.value;
+            loginForm.reset();
+        })
+
     }
 
-}
 
-function loginSubmit (loginSubmitEvent){
-    console.log(loginSubmitEvent);
-}
 
+}
 
 function objectToString (object) {
   let stringObject =  Object.entries(object).map((mapResponse) => {
