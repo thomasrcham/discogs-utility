@@ -1,4 +1,6 @@
-function main () {//global variables
+function main () {
+    
+//global variables
 let parsedReleases = []
 // let reissues = []
 
@@ -92,13 +94,13 @@ function fetchDiscogsFull() {
     
     function checkChar (array) {
         if (array.artist.charAt(array.artist.length - 3) === '(') {
-          array.artist = array.artist.substring(0,array.artist.length - 4)
-          return (array.artist)
+          array.artist = array.artist.substring(0,array.artist.length - 4);
+          return (array.artist);
         }
     }
 
     setTimeout(() => { 
-        fetchDiscogsFull() 
+        fetchDiscogsFull()
     }, 500);
     
 });
