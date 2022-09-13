@@ -1,10 +1,12 @@
 //global variables
 let parsedReleases = []
-let reissues = []
+// let reissues = []
+
+addEventListener('DOMContentLoaded', () => {
 
 //fetch data from Discogs, send to be parsed, send to be alphabetized by artist
 function fetchDiscogsFull() {
-    fetch(`https://api.discogs.com/users/${userName}/collection/folders/0/releases?per_page=15`)
+    fetch(`https://api.discogs.com/users/${userName}/collection/folders/0/releases?per_page=25`)
         .then((res) => res.json())
         .then((data) => {
             console.log(data)
@@ -13,14 +15,86 @@ function fetchDiscogsFull() {
             returnData.forEach(parseInfo);
             orderByYear(parsedReleases);
             alphabetizeByArtist(parsedReleases);
-            console.log(parsedReleases)
-        })
+            console.log(parsedReleases)})
+            .then(createTable)
 }
+
+//create table
+    function createTable() {
+        let x = parsedReleases.length;
+        for (let i = 0; i < x; i++) {
+            if ((i % 5) === 0) {
+                createRow(i);
+            } else {
+                createCell(i);
+            }
+        }
+    }
+  
+// creates rows for the first and then every fifth item in array    
+    function createRow(i) {
+        let tr = document.createElement('tr');
+        let td = document.createElement('td');
+        let p = document.createElement('p');
+        let theTable = document.querySelector('table')
+    
+        tr.classList = 'row';
+        tr.id = `${i / 5}`;
+
+        td.classList = 'album';
+        td.id = 'td' + `${i}`;
+
+        p.innerText = parsedReleases[i].artist;
+        p.classList = 'artistName';
+
+
+
+        // if (i<9) {
+        // td.setAttribute('background', `./images/image0${i + 1}.png`);
+        // } else{ 
+        //     td.setAttribute('background', `./images/image${i + 1}.png`);
+        // }
+
+        td.appendChild(p);
+        tr.appendChild(td);
+        theTable.appendChild(tr);
+    }
+
+//creates cells for all remaining array items    
+    function createCell(i) {
+        let td = document.createElement('td');
+        let trID = Math.floor(i / 5)
+        let p = document.createElement('p');
+
+        td.classList = 'album';
+        td.id = 'td' + `${i}`;
+
+        p.innerText = parsedReleases[i].artist;
+        p.classList = 'artistName';
+
+        // if (i<9) {
+        //     td.setAttribute('background', `./images/image0${i + 1}.png`);
+        //     } else{ 
+        //         td.setAttribute('background', `./images/image${i + 1}.png`);
+        //     }
+
+        td.appendChild(p);
+        document.getElementById(trID).appendChild(td);
+    
+    }
+    
+    
+
+    setTimeout(() => { 
+        fetchDiscogsFull() 
+    }, 500);
+    
+});
 
 //take returned data from discogs, parse out desired info, return in array
 function parseInfo(release) {
     ;
-    let singleParsedRelease = [
+    let singleParsedRelease = 
         {
             'artist': release.basic_information.artists[0].name,
             'title': release.basic_information.title,
@@ -28,7 +102,7 @@ function parseInfo(release) {
             'year': release.basic_information.year,
             'genre': release.basic_information.genres[0],
             'descriptions': release.basic_information.formats[0].descriptions
-        }];
+        };
     // console.log(singleParsedRelease)
     parsedReleases.push(singleParsedRelease)
 
@@ -51,8 +125,8 @@ function parseInfo(release) {
 //order by year
 function orderByYear(array) {
     array.sort((a, b) => {
-        let aValue = a[0].year;
-        let bValue = b[0].year;
+        let aValue = a.year;
+        let bValue = b.year;
         if (aValue < bValue) {
             return -1
         } else if (aValue > bValue) {
@@ -67,8 +141,8 @@ function orderByYear(array) {
 //alphabetize by artist and return changed array
 function alphabetizeByArtist(array) {
     array.sort((a, b) => {
-        let aValue = a[0].artist;
-        let bArtist = b[0].artist;
+        let aValue = a.artist;
+        let bArtist = b.artist;
 
         if (aValue.localeCompare(bArtist) < 0) {
             return -1
@@ -81,47 +155,6 @@ function alphabetizeByArtist(array) {
     })
 }
 
-function createTable() {
-    let x = 25;
-    for (let i = 0; i < x; i++) {
-        if ((i % 5) === 0) {
-            createRow(i);
-        } else {
-            createCell(i);
-        }
-    }
-}
-
-function createRow(i) {
-    let tr = document.createElement('tr');
-    let td = document.createElement('td');
-    let table = document.getElementById('thetable')
-
-    tr.classList = 'row';
-    tr.id = `${i / 5}`;
-    td.classList = 'album';
-    td.id = 'td' + `${i}`;
-    td.setAttribute('background', `./images/image${i + 1}.png`);
-
-    tr.appendChild(td);
-    table.appendChild(tr);
-}
-
-function createCell(i) {
-    let td = document.createElement('td');
-    let trID = Math.floor(i / 5)
-
-    td.classList = 'album';
-    td.id = 'td' + `${i}`;
-    td.setAttribute('background', `./images/image${i + 1}.png`);
-
-    document.getElementById(trID).appendChild(td);
-
-}
-
-createTable()
-
-setTimeout(() => { fetchDiscogsFull() }, 500);
 
 
 // function discogsImage() {
