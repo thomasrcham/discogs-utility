@@ -92,19 +92,19 @@ function main() {
             document.getElementById(trID).appendChild(td);
 
             td.addEventListener('click', (tdClickEvent) => { detailReflow(tdClickEvent) });
-
+            //reflow the table when an album is clicked
             function detailReflow(tdClickEvent) {
                 console.log(tdClickEvent);
                 const trDetail = document.createElement('tr');
                 const tdDetail = document.createElement('td');
                 const tdDetailP = document.createElement('p');
-                const targetTr = tdClickEvent.target.parentElement;
+                const targetTr = tdClickEvent.target.parentElement.parentElement;
 
-                trDetail.id = "trDetail";
+                trDetail.className = "trDetail";
                 trDetail.append(tdDetail);
 
                 tdDetail.colSpan = 5;
-                tdDetail.id = "tdDetail";
+                tdDetail.className = "tdDetail";
                 tdDetail.append(tdDetailP);
                 tdDetailP.innerText = "testInnerText"
 
@@ -112,6 +112,11 @@ function main() {
 
                 trDetail.addEventListener('click', (trClickEvent) => {
                     console.log(trClickEvent);
+                    // trClickEvent.target.remove();
+                    const oldDetails = document.getElementsByClassName('trDetail');
+                    for (const row in oldDetails) {
+                        oldDetails[row].remove();
+                    }
                 })
 
             }
