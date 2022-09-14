@@ -113,11 +113,8 @@ function main() {
 
                 tdDetail.colSpan = 5;
                 tdDetail.className = "tdDetail";
-                // tdDetail.append(tdDetailP);
 
                 //MORE DETAIL HERE!
-                // tdDetailP.innerText = "testInnerText"
-
 
                 let parsedDetails = parsedReleases[targetTdId]
                 let displayDetailsArray = ['artist', 'title', 'year', 'genre', 'descriptions'];
@@ -128,7 +125,14 @@ function main() {
                  */
                 displayDetailsArray.forEach((key) => {
                     let tdDetailP = document.createElement('p');
-                    tdDetailP.innerText = `${key} ${parsedDetails[key]}`;
+                    //if the data type is an array, then convert to a string with spaces between the elements
+                    if (key == 'descriptions') {
+                        console.log(parsedDetails[key]);
+                        tdDetailP.innerText = `${key}: ${Object.values(parsedDetails[key]).join(' ')}`;
+                    }
+                    else {
+                        tdDetailP.innerText = `${key} ${parsedDetails[key]}`;
+                    }
                     tdDetailP.id = key;
                     tdDetail.append(tdDetailP);
                 })
