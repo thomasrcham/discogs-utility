@@ -19,7 +19,7 @@ function main() {
                     parsedReleases.forEach(checkChar);
                     orderByYear(parsedReleases);
                     alphabetizeByArtist(parsedReleases);
-                    fixYear(parsedReleases);
+                    // fixYear(parsedReleases);
                     console.log(parsedReleases);
                 })
                 .then(createTable);
@@ -149,6 +149,11 @@ function main() {
             }
         }
 
+        /**
+         * 
+         * @param {function} array checks if release is reissue then reassigns year to master release
+         */
+
         function fixYear(array) {
             isReissue(array);
             array.forEach((array) => {
@@ -182,11 +187,13 @@ function main() {
          * pulls master release year from Discogs
          */
         function getYear(url) {
-            let newYearFetch = "";
-            newYearFetch =
+            let newYearFetch =
                 fetch(url)
                     .then((res) => res.json())
-                    .then((master) => { return master.year })
+                    .then((master) => {
+                        debugger;
+                        return master.year
+                    })
             return newYearFetch;
         }
 
