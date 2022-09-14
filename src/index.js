@@ -121,7 +121,11 @@ function main() {
 
                 let parsedDetails = parsedReleases[targetTdId]
                 let displayDetailsArray = ['artist', 'title', 'year', 'genre', 'descriptions'];
-
+                /**
+                 * Populate the description row table data with multiple p tags and the associated data from parsedReleases
+                 * @param {array} displayDetailsArray - the list of details we want from parsedReleases
+                 * @param {object} parsedReleases[id] - the object representing the album we want details on from parsedReleases
+                 */
                 displayDetailsArray.forEach((key) => {
                     let tdDetailP = document.createElement('p');
                     tdDetailP.innerText = `${key} ${parsedDetails[key]}`;
