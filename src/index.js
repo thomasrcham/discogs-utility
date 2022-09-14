@@ -19,6 +19,7 @@ function main() {
                     parsedReleases.forEach(checkChar);
                     orderByYear(parsedReleases);
                     alphabetizeByArtist(parsedReleases);
+                    fixYear(parsedReleases);
                     console.log(parsedReleases);
                 })
                 .then(createTable);
@@ -137,12 +138,58 @@ function main() {
 
             }
         }
+
+        /**
+         * removes tailing parentheses if present 
+        */
         function checkChar(array) {
             if (array.artist.charAt(array.artist.length - 3) === '(') {
                 array.artist = array.artist.substring(0, array.artist.length - 4);
                 return (array.artist);
             }
         }
+
+        function fixYear(array) {
+            isReissue(array);
+            array.forEach((array) => {
+                if (array.reissue === true) {
+                    let newYear = getYear(array.masterURL);
+                    array.year = newYear;
+                    return array
+                }
+            });
+            console.log(array)
+        }
+
+
+        /**
+         * checks if descriptions contains 'reissue', 'remastered', or 'remixed' and 
+         * adds a true/false flag to array to indicate
+         */
+        function isReissue(array) {
+            for (let item of array) {
+                let desc = item.descriptions
+                if (desc.some((item) => {
+                    let check = item.slice(0, 2)
+                    if (check.toLowerCase() === 're') { return true }
+                })) {
+                    item.reissue = true
+                } else { item.reissue = false }
+            }
+        }
+
+        /**
+         * pulls master release year from Discogs
+         */
+        function getYear(url) {
+            let newYearFetch = "";
+            newYearFetch =
+                fetch(url)
+                    .then((res) => res.json())
+                    .then((master) => { return master.year })
+            return newYearFetch;
+        }
+
         setTimeout(() => {
             fetchDiscogsFull()
         }, 500);
@@ -163,12 +210,13 @@ function main() {
             {
                 'artist': release.basic_information.artists[0].name,
                 'title': release.basic_information.title,
-                // 'year': getYear(release.basic_information.master_url),
                 'year': release.basic_information.year,
                 'genre': release.basic_information.genres[0],
                 'descriptions': release.basic_information.formats[0].descriptions,
                 'folderID': release.folder_id,
                 'cover': release.basic_information.cover_image,
+                'url': release.basic_information.resource_url,
+                'masterURL': release.basic_information.master_url,
             };
             // console.log(singleParsedRelease)
 
@@ -176,19 +224,6 @@ function main() {
 
             return parsedReleases;
         }
-
-        //pull year from Master Release
-        // function getYear(url) {
-        //     let year =
-        //         fetch(url)
-        //             .then((res) => res.json())
-        //             .then((data) => {
-        //                 // debugger
-        //                 year = data.year;
-        //                 return year;
-        //             })
-        //     return year
-        // }
 
         //order by year
         function orderByYear(array) {
