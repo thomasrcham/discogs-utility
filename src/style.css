@@ -1,13 +1,13 @@
 body {
-    background-color: black;
+  background-color: black;
 }
 
 .coverImage {
-    display: block;
-    object-fit: cover;
-    max-width: 100%;
-    width: 100%;
-    transition: 0.2s;
+  display: block;
+  object-fit: cover;
+  max-width: 100%;
+  width: 100%git;
+  transition: 0.2s;
 }
 
 .albumCell {
@@ -18,8 +18,8 @@ body {
   position: relative
 }
 
-.albumCell:hover .coverImage{
-  opacity:0.5
+.albumCell:hover .coverImage {
+  opacity: 0.5
 }
 
 .albumCell:hover .overlayText {
