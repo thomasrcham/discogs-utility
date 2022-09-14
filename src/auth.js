@@ -1,8 +1,8 @@
 
 document.addEventListener('DOMContentLoaded', () => checkKey());
 
-function checkKey () {
-    if (!key || !userName){
+function checkKey() {
+    if (!key || !userName) {
 
         const loginContainer = document.getElementById('loginForm');
         const loginForm = document.createElement('form');
@@ -50,8 +50,6 @@ function checkKey () {
 const authToken = `&token=${key}`;
 //assign authUsername and authToken so they can be used in fetches here
 
-
-}
 
 //test authenticated response
 //  response = fetch(`https://api.discogs.com/database/search?q=Nirvana${authToken}`)

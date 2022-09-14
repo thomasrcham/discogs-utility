@@ -26,6 +26,11 @@ body {
   opacity: 1;
 }
 
+.tdDetail>p {
+  color: white;
+}
+
+.div,
 .overlayText {
   color: white;
   opacity: 0;
