@@ -587,8 +587,8 @@ function checkDescriptions(array) {
             let check = item.slice(0, 2)
             if (check.toLowerCase() === 're') { return true }
         })) {
-            item.reissue = 'yes'
-        } else { item.reissue = 'no' }
+            item.reissue = true
+        } else { item.reissue = false }
     }
 }
 console.log(arrayTest)
