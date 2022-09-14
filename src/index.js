@@ -134,7 +134,6 @@ function main() {
                             tdDetailP.innerText = `${key}: ${Object.values(parsedDetails[key]).join(', ')}`;
                         }
                         else if (key == 'url') {
-                            // tdDetailP.innerHTML = `<a href="${parsedDetails[key]}">Album Page on Discogs</a>`;
                             fetch(parsedDetails[key])
                                 .then((res) => {
                                     return res.json();;
