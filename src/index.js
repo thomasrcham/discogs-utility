@@ -109,10 +109,10 @@ function main() {
                     //if the data type is an array, then convert to a string with spaces between the elements
                     if (key == 'descriptions') {
                         console.log(parsedDetails[key]);
-                        tdDetailP.innerText = `${key}: ${Object.values(parsedDetails[key]).join(' ')}`;
+                        tdDetailP.innerText = `${key}: ${Object.values(parsedDetails[key]).join(', ')}`;
                     }
                     else {
-                        tdDetailP.innerText = `${key} ${parsedDetails[key]}`;
+                        tdDetailP.innerText = `${key}: ${parsedDetails[key]}`;
                     }
                     tdDetailP.id = key;
                     tdDetail.append(tdDetailP);
