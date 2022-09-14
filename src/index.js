@@ -38,32 +38,13 @@ function main() {
         // creates rows for the first and then every fifth item in array    
         function createRow(i) {
             let tr = document.createElement('tr');
-            let td = document.createElement('td');
-            let div = document.createElement('div');
-            let img = document.createElement('img');
-            let p = document.createElement('p');
             let theTable = document.querySelector('table')
 
             tr.classList = 'row';
             tr.id = `${i / 5}`;
 
-            td.classList = 'albumCell';
-            td.id = `albumCell ${i}`;
-
-            div.classList = 'overlayText';
-
-            img.src = parsedReleases[i].cover;
-            img.alt = `${parsedReleases[i].artist} - ${parsedReleases[i].title}`;
-            img.id = `coverImage ${i}`;
-            img.classList = 'coverImage';
-
-            p.innerText = parsedReleases[i].artist;
-            p.classList = 'artistNameText';
-
-            div.appendChild(p);
-            td.append(img, div);
-            tr.appendChild(td);
             theTable.appendChild(tr);
+            createCell(i);
         }
 
         //creates cells for all remaining array items    
@@ -77,7 +58,7 @@ function main() {
             td.classList = 'albumCell';
             td.id = `albumCell ${i}`;
 
-            div.classList = 'div';
+            div.classList = 'overlayText';
 
             img.src = parsedReleases[i].cover;
             img.alt = `${parsedReleases[i].artist} - ${parsedReleases[i].title}`;

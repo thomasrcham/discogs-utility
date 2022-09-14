@@ -6,7 +6,7 @@ body {
   display: block;
   object-fit: cover;
   max-width: 100%;
-  width: 100%git;
+  width: 100%;
   transition: 0.2s;
 }
 
@@ -15,7 +15,7 @@ body {
   border-style: solid;
   border-color: white;
   border-width: 1px;
-  position: relative
+  position: relative;
 }
 
 .albumCell:hover .coverImage {
