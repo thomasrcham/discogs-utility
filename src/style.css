@@ -4,9 +4,10 @@ body {
 
 .coverImage {
   display: block;
-  object-fit: contain;
+  object-fit: cover;
   max-width: 100%;
-  transition: 0.3s;
+  width: 100%git;
+  transition: 0.2s;
 }
 
 .albumCell {
@@ -21,7 +22,7 @@ body {
   opacity: 0.5
 }
 
-.albumCell:hover .div {
+.albumCell:hover .overlayText {
   opacity: 1;
 }
 
@@ -29,10 +30,11 @@ body {
   color: white;
 }
 
-.div {
+.div,
+.overlayText {
   color: white;
   opacity: 0;
-  transition: 0.3s;
+  transition: 0.2s;
   position: absolute;
   top: 0;
   left: 10;

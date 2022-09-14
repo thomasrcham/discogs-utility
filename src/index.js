@@ -51,7 +51,7 @@ function main() {
             td.classList = 'albumCell';
             td.id = `albumCell ${i}`;
 
-            div.classList = 'div';
+            div.classList = 'overlayText';
 
             img.src = parsedReleases[i].cover;
             img.alt = `${parsedReleases[i].artist} - ${parsedReleases[i].title}`;
