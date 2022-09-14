@@ -26,8 +26,16 @@ body {
   opacity: 1;
 }
 
+.tdDetail>img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .tdDetail>p {
   color: white;
+  text-align: center;
+  font-size: x-large;
 }
 
 .div,
