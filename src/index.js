@@ -100,7 +100,6 @@ function main() {
                     }
                 }
                 function populateTrDetail() {
-                    console.log(tdClickEvent);
                     const trDetail = document.createElement('tr');
                     const tdDetailImage = document.createElement('td');
                     const tdDetailText = document.createElement('td');
@@ -132,7 +131,6 @@ function main() {
                         let tdDetailP = document.createElement('p');
                         //if the data type is an array, then convert to a string with spaces between the elements
                         if (key == 'descriptions') {
-                            console.log(parsedDetails[key]);
                             tdDetailP.innerText = `${key}: ${Object.values(parsedDetails[key]).join(', ')}`;
                         }
                         else {
@@ -149,7 +147,6 @@ function main() {
                     targetTr.insertAdjacentElement('afterEnd', trDetail);
 
                     trDetail.addEventListener('click', (trClickEvent) => {
-                        console.log(trClickEvent);
                         deleteTrDetail();
                     })
                 }
