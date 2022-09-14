@@ -83,17 +83,22 @@ function main() {
                 deleteTrDetail();
                 console.log(tdClickEvent);
                 const trDetail = document.createElement('tr');
-                const tdDetail = document.createElement('td');
+                const tdDetailImage = document.createElement('td');
+                const tdDetailText = document.createElement('td');
                 const targetTr = tdClickEvent.target.parentElement.parentElement;
                 const targetTd = tdClickEvent.target.parentElement;
                 const targetTdId = targetTd.id.split(' ')[1];
 
 
                 trDetail.id = "trDetail";
-                trDetail.append(tdDetail);
+                trDetail.append(tdDetailText);
+                trDetail.append(tdDetailImage);
 
-                tdDetail.colSpan = 5;
-                tdDetail.className = "tdDetail";
+                tdDetailImage.colSpan = 2;
+                tdDetailImage.className = "tdDetail";
+
+                tdDetailText.colSpan = 3;
+                tdDetailText.className = "tdDetail";
 
                 //MORE DETAIL HERE!
 
@@ -109,16 +114,18 @@ function main() {
                     //if the data type is an array, then convert to a string with spaces between the elements
                     if (key == 'descriptions') {
                         console.log(parsedDetails[key]);
-                        tdDetailP.innerText = `${key}: ${Object.values(parsedDetails[key]).join(', ')}`;
+                        tdDetailP.innerText = `${key}: ${Object.values(parsedDetails).join(', ')}`;
                     }
                     else {
                         tdDetailP.innerText = `${key}: ${parsedDetails[key]}`;
                     }
                     tdDetailP.id = key;
-                    tdDetail.append(tdDetailP);
+                    tdDetailText.append(tdDetailP);
+
                 })
-
-
+                let tdDetailImageCover = document.createElement('img');
+                tdDetailImageCover.src = parsedDetails.cover;
+                tdDetailImage.append(tdDetailImageCover);
 
                 targetTr.insertAdjacentElement('afterEnd', trDetail);
 
