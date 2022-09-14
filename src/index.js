@@ -122,7 +122,7 @@ function main() {
                     //MORE DETAIL HERE!
 
                     let parsedDetails = parsedReleases[targetTdId]
-                    let displayDetailsArray = ['artist', 'title', 'year', 'genre', 'descriptions'];
+                    let displayDetailsArray = ['artist', 'title', 'year', 'genre', 'descriptions', 'url'];
                     /**
                      * Populate the description row table data with multiple p tags and the associated data from parsedReleases
                      * @param {array} displayDetailsArray - the list of details we want from parsedReleases
@@ -134,6 +134,19 @@ function main() {
                         if (key == 'descriptions') {
                             tdDetailP.innerText = `${key}: ${Object.values(parsedDetails[key]).join(', ')}`;
                         }
+                        else if (key == 'url') {
+                            // tdDetailP.innerHTML = `<a href="${parsedDetails[key]}">Album Page on Discogs</a>`;
+                            fetch(parsedDetails[key])
+                                .then((res) => {
+                                    return res.json();;
+                                })
+                                .then((data) => {
+                                    console.log(data.uri);
+                                    tdDetailP.innerHTML = `<a href ="${data.uri}"> Album Page on Discogs</a>`;
+                                })
+
+
+                        }
                         else {
                             tdDetailP.innerText = `${key}: ${parsedDetails[key]}`;
                         }
@@ -141,6 +154,7 @@ function main() {
                         tdDetailText.append(tdDetailP);
 
                     })
+
                     let tdDetailImageCover = document.createElement('img');
                     tdDetailImageCover.src = parsedDetails.cover;
                     tdDetailImage.append(tdDetailImageCover);
@@ -150,6 +164,7 @@ function main() {
                     trDetail.addEventListener('click', (trClickEvent) => {
                         deleteTrDetail();
                     })
+
                 }
 
             }
