@@ -77,7 +77,7 @@ function main() {
             td.classList = 'albumCell';
             td.id = `albumCell ${i}`;
 
-            div.classList = 'overlayText';
+            div.classList = 'div';
 
             img.src = parsedReleases[i].cover;
             img.alt = `${parsedReleases[i].artist} - ${parsedReleases[i].title}`;
@@ -91,85 +91,108 @@ function main() {
             td.append(img, div);
             document.getElementById(trID).appendChild(td);
 
-        }
+            td.addEventListener('click', (tdClickEvent) => { detailReflow(tdClickEvent) });
 
+            function detailReflow(tdClickEvent) {
+                console.log(tdClickEvent);
+                const trDetail = document.createElement('tr');
+                const tdDetail = document.createElement('td');
+                const tdDetailP = document.createElement('p');
+                const targetTr = tdClickEvent.target.parentElement;
+
+                trDetail.id = "trDetail";
+                trDetail.append(tdDetail);
+
+                tdDetail.colSpan = 5;
+                tdDetail.id = "tdDetail";
+                tdDetail.append(tdDetailP);
+                tdDetailP.innerText = "testInnerText"
+
+                targetTr.insertAdjacentElement('afterEnd', trDetail)
+
+                trDetail.addEventListener('click', (trClickEvent) => {
+                    console.log(trClickEvent);
+                })
+
+            }
+        }
         function checkChar(array) {
             if (array.artist.charAt(array.artist.length - 3) === '(') {
                 array.artist = array.artist.substring(0, array.artist.length - 4);
                 return (array.artist);
             }
         }
-
         setTimeout(() => {
             fetchDiscogsFull()
         }, 500);
 
-    });
 
-    //take returned data from discogs, parse out desired info, return in array
-    function parseInfo(release) {
-        ;
-        let singleParsedRelease =
-        {
-            'artist': release.basic_information.artists[0].name,
-            'title': release.basic_information.title,
-            // 'year': getYear(release.basic_information.master_url),
-            'year': release.basic_information.year,
-            'genre': release.basic_information.genres[0],
-            'descriptions': release.basic_information.formats[0].descriptions,
-            'folderID': release.folder_id,
-            'cover': release.basic_information.cover_image,
-        };
-        // console.log(singleParsedRelease)
 
-        parsedReleases.push(singleParsedRelease)
+        //take returned data from discogs, parse out desired info, return in array
+        function parseInfo(release) {
+            ;
+            let singleParsedRelease =
+            {
+                'artist': release.basic_information.artists[0].name,
+                'title': release.basic_information.title,
+                // 'year': getYear(release.basic_information.master_url),
+                'year': release.basic_information.year,
+                'genre': release.basic_information.genres[0],
+                'descriptions': release.basic_information.formats[0].descriptions,
+                'folderID': release.folder_id,
+                'cover': release.basic_information.cover_image,
+            };
+            // console.log(singleParsedRelease)
 
-        return parsedReleases;
-    }
+            parsedReleases.push(singleParsedRelease)
 
-    //pull year from Master Release
-    // function getYear(url) {
-    //     let year =
-    //         fetch(url)
-    //             .then((res) => res.json())
-    //             .then((data) => {
-    //                 // debugger
-    //                 year = data.year;
-    //                 return year;
-    //             })
-    //     return year
-    // }
+            return parsedReleases;
+        }
 
-    //order by year
-    function orderByYear(array) {
-        array.sort((a, b) => {
-            let aValue = a.year;
-            let bValue = b.year;
-            if (aValue < bValue) {
-                return -1
-            } else if (aValue > bValue) {
-                return 1
-            } else if (aValue === bValue) {
-                return 0
-            }
+        //pull year from Master Release
+        // function getYear(url) {
+        //     let year =
+        //         fetch(url)
+        //             .then((res) => res.json())
+        //             .then((data) => {
+        //                 // debugger
+        //                 year = data.year;
+        //                 return year;
+        //             })
+        //     return year
+        // }
 
-        })
-    }
+        //order by year
+        function orderByYear(array) {
+            array.sort((a, b) => {
+                let aValue = a.year;
+                let bValue = b.year;
+                if (aValue < bValue) {
+                    return -1
+                } else if (aValue > bValue) {
+                    return 1
+                } else if (aValue === bValue) {
+                    return 0
+                }
 
-    //alphabetize by artist and return changed array
-    function alphabetizeByArtist(array) {
-        array.sort((a, b) => {
-            let aValue = a.artist;
-            let bArtist = b.artist;
+            })
+        }
 
-            if (aValue.localeCompare(bArtist) < 0) {
-                return -1
-            } else if (aValue.localeCompare(bArtist) > 0) {
-                return 1
-            } else if (aValue.localeCompare(bArtist) === 0) {
-                return 0
-            }
+        //alphabetize by artist and return changed array
+        function alphabetizeByArtist(array) {
+            array.sort((a, b) => {
+                let aValue = a.artist;
+                let bArtist = b.artist;
 
-        })
-    }
+                if (aValue.localeCompare(bArtist) < 0) {
+                    return -1
+                } else if (aValue.localeCompare(bArtist) > 0) {
+                    return 1
+                } else if (aValue.localeCompare(bArtist) === 0) {
+                    return 0
+                }
+
+            })
+        }
+    })
 }
