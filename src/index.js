@@ -135,11 +135,16 @@ function main() {
                         }
                         else if (key == 'url') {
                             // tdDetailP.innerHTML = `<a href="${parsedDetails[key]}">Album Page on Discogs</a>`;
-                            let destURL = fetch(parsedDetails[key])
-                                .then((res) => res.json())
-                                .then((data) => { return data.uri; })
+                            fetch(parsedDetails[key])
+                                .then((res) => {
+                                    return res.json();;
+                                })
+                                .then((data) => {
+                                    console.log(data.uri);
+                                    tdDetailP.innerHTML = `<a href ="${data.uri}"> Album Page on Discogs</a>`;
+                                })
 
-                            tdDetailP.innerHTML = `<a href ="${destURL}"> Album Page on Discogs</a>`;
+
                         }
                         else {
                             tdDetailP.innerText = `${key}: ${parsedDetails[key]}`;
