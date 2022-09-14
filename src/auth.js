@@ -1,25 +1,33 @@
+
 document.addEventListener('DOMContentLoaded', () => checkKey());
 
 function checkKey () {
     if (!key || !userName){
+
         const loginContainer = document.getElementById('loginForm');
         const loginForm = document.createElement('form');
         const loginUserName = document.createElement('input');
         const loginPAT = document.createElement('input');
-        const loginSubmit = document.createElement('input');
+        const loginSubmit = document.createElement('button');
 
         loginForm.id = "loginForm";
-        loginForm.action = "#";
+        loginForm.addEventListener('submit', (loginSubmitEvent) => {
+            loginSubmitEvent.preventDefault();
+            console.log(loginSubmitEvent);
+
+            //need to grab key and username and assign those values - RETURN THESE so that other functions may use them!
+        });
 
         loginSubmit.type = "submit";
-        loginSubmit.addEventListener('submit', loginSubmit);
-        
+        loginSubmit.value = "submit";
+        loginSubmit.innerText = "Submit";
+
         loginUserName.placeholder = "Discogs Username";
         loginUserName.id = "loginUserName";
-        
+
         loginPAT.placeholder = "Discogs PAT";
         loginPAT.id = "loginPAT"
-        
+
         loginForm.append(loginUserName, loginPAT, loginSubmit);
         loginContainer.append(loginForm);
 
@@ -34,21 +42,19 @@ function checkKey () {
         })
 
     }
+    else {
 
+        main();
+    }
+}
+const authToken = `&token=${key}`;
+//assign authUsername and authToken so they can be used in fetches here
 
 
 }
 
-function objectToString (object) {
-  let stringObject =  Object.entries(object).map((mapResponse) => {
-        let key = mapResponse[0];
-        let value = mapResponse[1];
-        return `${key}="${value}"`;
-    }).join(', ');
-    return stringObject;
-}
 //test authenticated response
-//  response = fetch(`https://api.discogs.com/database/search?q=Nirvana&token=${key}`)
+//  response = fetch(`https://api.discogs.com/database/search?q=Nirvana${authToken}`)
 //  .then((response) => response.json())
 //  .then((response) => console.log(response));
 
