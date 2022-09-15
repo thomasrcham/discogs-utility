@@ -38,6 +38,14 @@ body {
   font-size: x-large;
 }
 
+.tdDetail>p>a {
+  color: aqua;
+}
+
+.tdDetail>p>a:visited {
+  color: aquamarine;
+}
+
 .div,
 .overlayText {
   color: white;
