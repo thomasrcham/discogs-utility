@@ -38,6 +38,27 @@ body {
   font-size: x-large;
 }
 
+.tdDetail>p>a,
+form>a {
+  color: aqua;
+}
+
+.tdDetail>p>a:visited,
+form>a:visited {
+  color: aquamarine;
+}
+
+form {
+  padding-top: 5%;
+  padding-left: 5%;
+}
+
+form>a {
+  display: block;
+  padding-top: 2.4%;
+}
+
+
 .div,
 .overlayText {
   color: white;
@@ -51,4 +72,13 @@ body {
 
 #thetable {
   table-layout: fixed;
+}
+
+#footer {
+  color: #666;
+  position: fixed;
+  bottom: 0px;
+  margin-bottom: 1%;
+  margin-left: 5%;
+
 }
