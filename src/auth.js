@@ -9,6 +9,10 @@ function checkKey() {
         const loginUserName = document.createElement('input');
         const loginPAT = document.createElement('input');
         const loginSubmit = document.createElement('button');
+        const loginLink = document.createElement('a');
+
+        loginLink.href = "https://www.discogs.com/settings/developers";
+        loginLink.innerText = "Get Personal Access Token here!"
 
         loginForm.id = "loginForm";
         loginForm.addEventListener('submit', (loginSubmitEvent) => {
@@ -28,7 +32,7 @@ function checkKey() {
         loginPAT.placeholder = "Discogs PAT";
         loginPAT.id = "loginPAT"
 
-        loginForm.append(loginUserName, loginPAT, loginSubmit);
+        loginForm.append(loginUserName, loginPAT, loginSubmit, loginLink);
         loginContainer.append(loginForm);
 
         //Attempting to send out loginUserName and loginPat to loginSubmit function
