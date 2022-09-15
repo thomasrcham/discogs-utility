@@ -46,17 +46,18 @@ function checkKey() {
             //console.log(e.target.loginPAT.value) //Works
             userName = e.target.loginUserName.value;
             key = e.target.loginPAT.value;
-            numberAlbums = e.target.loginNumber.value;
-            loginForm.reset();
+
+            loginForm.remove();
+
+            main();
+
         })
 
     }
     else {
-
         main();
     }
 }
-const authToken = `&token=${key}`;
 //assign authUsername and authToken so they can be used in fetches here
 
 
