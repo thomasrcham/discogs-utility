@@ -46,7 +46,9 @@ function checkKey() {
             //console.log(e.target.loginPAT.value) //Works
             userName = e.target.loginUserName.value;
             key = e.target.loginPAT.value;
-
+            if (parseInt(e.target.loginNumber.value) > 0) {
+                numberAlbums = e.target.loginNumber.value;
+            }
             loginForm.remove();
 
             main();
