@@ -8,6 +8,7 @@ function checkKey() {
         const loginForm = document.createElement('form');
         const loginUserName = document.createElement('input');
         const loginPAT = document.createElement('input');
+        const loginNumber = document.createElement('input');
         const loginSubmit = document.createElement('button');
         const loginLink = document.createElement('a');
 
@@ -30,7 +31,10 @@ function checkKey() {
         loginUserName.id = "loginUserName";
 
         loginPAT.placeholder = "Discogs PAT";
-        loginPAT.id = "loginPAT"
+        loginPAT.id = "loginPAT";
+
+        loginNumber.placeholder = "Max # of albums to display";
+        loginNumber.id = "loginNumber";
 
         loginForm.append(loginUserName, loginPAT, loginSubmit, loginLink);
         loginContainer.append(loginForm);
@@ -42,6 +46,7 @@ function checkKey() {
             //console.log(e.target.loginPAT.value) //Works
             userName = e.target.loginUserName.value;
             key = e.target.loginPAT.value;
+            numberAlbums = e.target.loginNumber.value;
             loginForm.reset();
         })
 

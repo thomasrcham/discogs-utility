@@ -8,7 +8,7 @@ function main() {
 
         //fetch data from Discogs, send to be parsed, send to be alphabetized by artist
         function fetchDiscogsFull() {
-            fetch(`https://api.discogs.com/users/${userName}/collection/folders/0/releases?per_page=25${authToken}`)
+            fetch(`https://api.discogs.com/users/${userName}/collection/folders/0/releases?per_page=${numberAlbums}${authToken}`)
                 .then((res) => res.json())
                 .then((data) => {
                     console.log(data)
