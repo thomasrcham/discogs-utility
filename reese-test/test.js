@@ -1,16 +1,14 @@
-// let fetchYear = ''
-// async function getYear(url) {
-//     await fetch(url)
-//         .then((res) => res.json())
-//         .then((master) => fetchYear = master.year)
-//     return fetchYear
-// }
+// let url = 'https://api.discogs.com/masters/910103'
+// let fYear = ''
 
+const fetchYear = (url) => {
+    return fetch(url)
+        .then((res) => res.json())
+        .then((master) => { return master.year });
+}
 
-// console.log(getYear('https://api.discogs.com/masters/910103'))
+// fetchYear('https://api.discogs.com/masters/910103').then(res => { console.log(res) })
+// result: 2015
 
+console.log(() => fetchYear('https://api.discogs.com/masters/910103').then(res => { return res }))
 
-
-fetch('https://api.discogs.com/releases/1158751')
-    .then((res) => res.json())
-    .then((data) => console.log(data.uri))
