@@ -8,6 +8,7 @@ function checkKey() {
         const loginForm = document.createElement('form');
         const loginUserName = document.createElement('input');
         const loginPAT = document.createElement('input');
+        const loginNumber = document.createElement('input');
         const loginSubmit = document.createElement('button');
         const loginLink = document.createElement('a');
 
@@ -30,9 +31,12 @@ function checkKey() {
         loginUserName.id = "loginUserName";
 
         loginPAT.placeholder = "Discogs PAT";
-        loginPAT.id = "loginPAT"
+        loginPAT.id = "loginPAT";
 
-        loginForm.append(loginUserName, loginPAT, loginSubmit, loginLink);
+        loginNumber.placeholder = "Max # of albums to load";
+        loginNumber.id = "loginNumber";
+
+        loginForm.append(loginUserName, loginPAT, loginNumber, loginSubmit, loginLink);
         loginContainer.append(loginForm);
 
         //Attempting to send out loginUserName and loginPat to loginSubmit function
@@ -42,6 +46,7 @@ function checkKey() {
             //console.log(e.target.loginPAT.value) //Works
             userName = e.target.loginUserName.value;
             key = e.target.loginPAT.value;
+            numberAlbums = e.target.loginNumber.value;
             loginForm.remove();
 
             main();
