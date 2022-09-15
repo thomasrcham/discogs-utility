@@ -36,7 +36,7 @@ function checkKey() {
         loginNumber.placeholder = "Max # of albums to display";
         loginNumber.id = "loginNumber";
 
-        loginForm.append(loginUserName, loginPAT, loginSubmit, loginLink);
+        loginForm.append(loginUserName, loginPAT, loginNumber, loginSubmit, loginLink);
         loginContainer.append(loginForm);
 
         //Attempting to send out loginUserName and loginPat to loginSubmit function
