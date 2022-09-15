@@ -33,7 +33,7 @@ function checkKey() {
         loginPAT.placeholder = "Discogs PAT";
         loginPAT.id = "loginPAT";
 
-        loginNumber.placeholder = "Max # of albums to load";
+        loginNumber.placeholder = "Max # of albums to display";
         loginNumber.id = "loginNumber";
 
         loginForm.append(loginUserName, loginPAT, loginNumber, loginSubmit, loginLink);
@@ -46,10 +46,11 @@ function checkKey() {
             //console.log(e.target.loginPAT.value) //Works
             userName = e.target.loginUserName.value;
             key = e.target.loginPAT.value;
-            numberAlbums = e.target.loginNumber.value;
+
             loginForm.remove();
 
             main();
+
         })
 
     }
@@ -64,4 +65,3 @@ function checkKey() {
 //  response = fetch(`https://api.discogs.com/database/search?q=Nirvana${authToken}`)
 //  .then((response) => response.json())
 //  .then((response) => console.log(response));
-
