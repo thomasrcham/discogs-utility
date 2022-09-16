@@ -58,7 +58,6 @@ form>a {
   padding-top: 2.4%;
 }
 
-
 .div,
 .overlayText {
   color: white;
@@ -69,16 +68,26 @@ form>a {
   left: 10;
 }
 
-
 #thetable {
   table-layout: fixed;
+  margin-bottom: 80px;
 }
 
 #footer {
-  color: #666;
+  color: rgb(133, 133, 133);
   position: fixed;
   bottom: 0px;
   margin-bottom: 1%;
   margin-left: 5%;
+  text-align: top;
+  background-color: rgba(100, 100, 100, 0.3);
+  visibility: hidden;
+}
 
+#footer a {
+  color: rgb(133, 133, 133)
+}
+
+#footer>p {
+  margin: 5px;
 }

@@ -3,7 +3,6 @@ function main() {
     //global variables
     let parsedReleases = [];
     let authToken = `&token=${key}`;
-    // let reissues = []
 
     //fetch data from Discogs, send to be parsed, send to be alphabetized by artist
     function fetchDiscogsFull() {
@@ -21,7 +20,8 @@ function main() {
                 // fixYear(parsedReleases);
                 console.log(parsedReleases);
             })
-            .then(createTable);
+            .then(createTable)
+            .then(document.getElementById('footer').style.visibility = 'visible');
     }
 
     //create table
