@@ -17,7 +17,7 @@ function main() {
                 parsedReleases.forEach(checkChar);
                 orderByYear(parsedReleases);
                 alphabetizeByArtist(parsedReleases);
-                // fixYear(parsedReleases);
+                isReissue(parsedReleases);
                 console.log(parsedReleases);
             })
             .then(createTable)
@@ -179,23 +179,6 @@ function main() {
         }
     }
 
-    /**
-     * 
-     * @param {function} array checks if release is reissue then reassigns year to master release
-     */
-
-    function fixYear(array) {
-        isReissue(array);
-        array.forEach((array) => {
-            if (array.reissue === true) {
-                let newYear = getYear(array.masterURL);
-                array.year = newYear;
-                return array
-            }
-        });
-        console.log(array)
-    }
-
 
     /**
      * checks if descriptions contains 'reissue', 'remastered', or 'remixed' and 
@@ -213,25 +196,9 @@ function main() {
         }
     }
 
-    /**
-     * pulls master release year from Discogs
-     */
-    function getYear(url) {
-        let newYearFetch =
-            fetch(url)
-                .then((res) => res.json())
-                .then((master) => {
-                    debugger;
-                    return master.year
-                })
-        return newYearFetch;
-    }
-
     setTimeout(() => {
         fetchDiscogsFull()
     }, 500);
-
-
 
     //take returned data from discogs, parse out desired info, return in array
     // or in jsdocs form
